@@ -1,0 +1,35 @@
+```gitignore
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log
+.terraform.lock.hcl
+
+# Ansible
+*.retry
+
+# IDEs
+.vscode/
+.idea/
+
+# Environment files and secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Logs
+*.log
