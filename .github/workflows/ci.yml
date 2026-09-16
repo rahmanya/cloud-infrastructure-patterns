@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  repository-validation:
+    name: Repository Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate repository structure
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          required_paths=(
+            ".github"
+            "automation"
+            "catalog"
+            "docs"
+            "infrastructure"
+            "policy"
+            "tests"
+            "README.md"
+          )
+
+          for path in "${required_paths[@]}"; do
+            if [[ ! -e "$path" ]]; then
+              echo "Required path missing: $path"
+              exit 1
+            fi
+
+            echo "Found: $path"
+          done
+
+          echo "Repository structure validation passed."
